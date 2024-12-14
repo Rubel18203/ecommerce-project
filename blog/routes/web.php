@@ -22,4 +22,10 @@ Route::get('/',[AdminController::class,'home']);
 
 Route::get('/home', [AdminController::class, 'index'])->name('home');
 Route::get('/Category',[HomeController::class,'view'])->name('Category');
+Route::get('/Add_category',[HomeController::class,'Add_category'])->name('Add_category');
+Route::get('/delete/{id}',[HomeController::class,'deletedata'])->name('delete');
+Route::get('/add_product',[HomeController::class,'product'])->name('add_product');
+Route::get('/store_product',[HomeController::class,'store'])->name('store_product');
+
+
 
