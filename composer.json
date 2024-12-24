@@ -1,5 +1,6 @@
 {
     "require": {
-        "laravel/jetstream": "^3.0"
+        "laravel/jetstream": "^3.0",
+        "intervention/image": "^2.7"
     }
 }

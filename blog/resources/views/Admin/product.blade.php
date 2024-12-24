@@ -88,7 +88,7 @@
 
               <div class="form-container">
                 
-    <form action="{{url('store_product')}}" method="get" enctype="multipart/form-dara">
+    <form action="{{url('store_product')}}" method="Get" enctype="#">
         @csrf 
         <label for="product_name">Title:</label>
         <input type="text" id="product_name" name="title" required>
@@ -111,8 +111,9 @@
             @endforeach
       
         </select>
-        <label for="photo">Product Image:</label>
-        <input type="file" name="photo" required>
+     
+        <label for="image">Product Image:</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
            
 
         <button type="submit">Submit</button>

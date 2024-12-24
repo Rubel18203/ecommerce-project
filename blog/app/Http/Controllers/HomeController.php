@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\products;
 
+
+
 class HomeController extends Controller
 {
     public function view(){
@@ -33,39 +35,34 @@ class HomeController extends Controller
       return view('Admin.product',compact('Category'));
     }
      
-    public function store(Request $request){
-      $product =new products();
+    public function store(Request $request)
+    {
+
+      $product=new products();
       $product->title=$request->title;
       $product->description=$request->description;
       $product->quantity=$request->quantity;
-      $product->category=$request->category_id;
+      $product->category=$request->ccategory_id;
+      //$products->image=$request->image;  
       $product->price=$request->price;
-       
-      
-      
-          $request->validate([
-              'name' => 'required|string|max:255',
-              'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-          ]);
-      
-          if ($request->hasFile('photo')) {
-              $file = $request->file('photo');
-              $filename = time() . '_' . $file->getClientOriginalName();
-              $file->move(public_path('uploads'), $filename);
-      
-              $product = new Products();
-           
-              $product->image = 'uploads/' . $filename;
-              $product->save();
-          }
-      
-          return redirect()->back()->with('success', 'Product added successfully!');
- 
-      
+      $product->image=$request->image; 
       $product->save();
-      return redirect()->back();
 
-    }
+    return redirect()->back();
+ }
+     public function show_product(){
+      $product=products::all();
+      return view('Admin.show_product',compact('product'));
+
+   }
+
+
+
+
+  }
+  
+      
    
+      
     
-}
+   
