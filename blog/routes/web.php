@@ -27,6 +27,9 @@ Route::get('/delete/{id}',[HomeController::class,'deletedata'])->name('delete');
 Route::get('/add_product',[HomeController::class,'product'])->name('add_product');
 Route::post('/store_product', [HomeController::class, 'store'])->name('store_product');
 Route::get('/show_product', [HomeController::class, 'show_product'])->name('show_product');
+Route::get('/delete_product/{id}', [HomeController::class, 'delete'])->name('/delete_product/{id}');
+Route::get('/Edit_product/{id}', [HomeController::class, 'Edit'])->name('/Edit_product/{id}');
+Route::get('/update_product/{id}', [HomeController::class, 'update'])->name('/update_product/{id}');
  
 
 

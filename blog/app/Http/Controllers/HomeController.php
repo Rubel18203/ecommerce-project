@@ -123,4 +123,51 @@ class HomeController extends Controller
     $product = products::all();
     return view('Admin.show_product', compact('product'));
   }
+  public function delete($id){
+    $product=products::find($id);
+    $product->delete();
+    return redirect()->back()->with('message', 'The message was successful.');
+  }
+  public function Edit($id){
+    $product=products::find($id);
+     
+    return view('Admin.Edit',compact('product'));
+  }
+  public function update(Request $request, $id){
+
+    $validatedData = $request->validate([
+      'title' => 'required|string|max:255',
+      'description' => 'required|string',
+      'quantity' => 'required|integer|min:1',
+      'category_id' => 'required|integer|exists:categories,id',
+      'price' => 'required|numeric|min:0',
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    try {
+      // Create a new product instance
+      $product=products::find($id);
+      $product->title = $request->title;
+      $product->description = $request->description;
+      $product->quantity = $request->quantity;
+      $product->category = $request->category_id;
+      $product->price = $request->price;
+
+      // Handle the image upload if an image is provided
+      if ($request->hasFile('image')) {
+        $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+        $request->image->move(public_path('product/images/'), $imageName);
+        $product->image = 'product/images/' . $imageName;
+      }
+
+      // Save the product to the database
+      $product->save();
+
+      // Redirect back with a success message
+      return redirect()->back()->with('success', 'Product created successfully!');
+    } catch (\Exception $e) {
+      // Redirect back with an error message in case of failure
+      return redirect()->back()->with('error', 'An error occurred while creating the product.');
+    }
+  }
 }

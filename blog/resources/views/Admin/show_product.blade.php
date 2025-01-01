@@ -42,6 +42,12 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+              @if(session()->has('message'))
+                 <div class="alert alert-success">
+                         <button type="button" class="close" data-dismiss="alert" aria-label="true">×</button>
+                              {{ session()->get('message') }}
+                  </div>
+              @endif
 
           <table>
             <thead>
@@ -52,6 +58,8 @@
                 <th>price</th>
                 <th>category</th>
                 <th>image</th>
+                <th>Delete</th>
+                <th>edit</th>
               </tr>
             </thead>
             <tbody>
@@ -69,6 +77,8 @@
                   Image not found
                   @endif
                 </td>
+                <td><a class="btn btn-danger" onclick="return confirm('are you sure to delete this')" href="{{url('delete_product',$product->id)}}">Delect</a></td>
+                <td><a clas =btn btn-success href="{{url('Edit_product',$product->id)}}">Edit</a></td>
               </tr>
               @endforeach
 
