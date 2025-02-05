@@ -1,33 +1,32 @@
 <?php
+ namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
-use App\Models\User;
-use Illuminate\Support\Facades\Auth; 
 use Illuminate\Http\Request;
+use App\Models\Products;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
-
 {
+    public function home()
+    {
+        $products = Products::all();
 
+        return view('Home.Userpage', Compact('products'));
+    }
 
-   public function home(){
-    return view('Home.Userpage');
-   }
     public function index()
     {
         if (Auth::check()) {
-            $usertype = Auth::user()->Usertype; 
+            $usertype = Auth::user()->Usertype;
 
-            if ($usertype === 'User') {
-                return view('Home.Userpage'); 
-            } elseif ($usertype === 'Admin') {
+            if ($usertype === '1') {
                 return view('Admin.index');
             } else {
-                return redirect()->back(); 
+                $products = Products::all();
+                return view('Home.Userpage', compact('products'));
             }
         }
 
-       
+        return redirect()->route('login');
     }
 }

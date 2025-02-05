@@ -30,6 +30,6 @@ Route::get('/show_product', [HomeController::class, 'show_product'])->name('show
 Route::get('/delete_product/{id}', [HomeController::class, 'delete'])->name('/delete_product/{id}');
 Route::get('/Edit_product/{id}', [HomeController::class, 'Edit'])->name('/Edit_product/{id}');
 Route::get('/update_product/{id}', [HomeController::class, 'update'])->name('/update_product/{id}');
- 
+
 
 
