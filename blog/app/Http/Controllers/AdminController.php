@@ -81,9 +81,21 @@ class AdminController extends Controller
 
       }
       public function cart_show (){
+        if(Auth::id()){
+        $id=Auth::user()->id;
+       $cart=carts::where('user_id',"=",$id)->get();
+        }
+      else
+      {
+          return redirect('login');
+      }
 
 
-        return view('Home.cart_show');
 
+        return view('Home.cart_show',compact('cart'));
+
+    }
+    public function remove(){
+        
     }
 }

@@ -32,4 +32,5 @@ Route::get('/Edit_product/{id}', [HomeController::class, 'Edit'])->name('/Edit_p
 Route::get('/update_product/{id}', [HomeController::class, 'update'])->name('/update_product/{id}');
 Route::get('/product_details/{id}', [AdminController::class, 'product_details'])->name('/product_details/{id}');
 Route::post('/Add_cart/{id}', [AdminController::class, 'Add_cart'])->name('/Add_cart/{id}');
-Route::get('/cart_show', [AdminController::class, 'cart_show']);
+Route::get('/cart_show', [AdminController::class, 'cart_show'])->name('/cart_show');
+Route::get('/remove_cart', [AdminController::class, 'remove'])->name('/remove_cart');
