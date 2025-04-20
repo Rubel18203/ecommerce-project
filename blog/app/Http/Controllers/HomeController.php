@@ -128,6 +128,7 @@ class HomeController extends Controller
     $product->delete();
     return redirect()->back()->with('message', 'The message was successful.');
   }
+ 
 
 
   }

@@ -65,6 +65,10 @@
         tbody tr:last-child td {
             border-bottom: none;
         }
+
+        h1. {
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -82,35 +86,48 @@
     <div class="table-form">
         <table>
             <?php $totalprice = 0; ?>
-            < thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>image</th>
+                <th>action</th>
+                <th>
+                    <Remove< /th>
+            </tr>
+
+            @foreach ($cart as $cart)
                 <tr>
-                    <th>ID</th>
-                    <th>Product Name</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                   <a href="{{url(remove_cart)}}"><th>actiron<th></a>
+
+                    <td>{{ $cart->id }}</td>
+                    <td>{{ $cart->product_titel }}</td>
+                    <td></td>
+                    <td>{{ $cart->price }}</td>
+                    <td>
+                        <img src="{{ asset($cart->image) }}" alt="{{ $cart->title }}" width="100" height="100">
+                    </td>
+                    <th><a class='btn-btn primary' href="{{ url('/remove_cart', $cart->id) }}">Remove</a></th>
+                    <?php $totalprice = $totalprice + $cart->price; ?>
+
                 </tr>
-
-                @foreach ($cart as $cart)
-                    <tr>
-
-                        <td>{{ $cart->id }}</td>
-                        <td>{{ $cart->product_titel }}</td>
-                        <td></td>
-                        <td>{{ $cart->price }}</td>
-                        <td></td>
-                        <?php $totalprice = $totalprice + $cart->price; ?>
-
-                    </tr>
-                @endforeach
+            @endforeach
 
         </table>
 
     </div>
     <div>
-    <h1 class="total_deg">total price:
-        {{ $totalprice }}</h1>
+        <h1 class="total_deg">total price:
+            {{ $totalprice }}</h1>
     </div>
+    <br><br>
+    <div>
+        <h1 class=text-align:center>process to order</h1><br>
+        <a href="{{ url('cash_order') }}"class="btn btn-danger">cash on delivery</a>
+
+    </div>
+
     <!-- footer start -->
     <footer>
         <div class="container">

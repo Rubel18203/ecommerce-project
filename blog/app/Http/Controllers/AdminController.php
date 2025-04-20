@@ -95,7 +95,20 @@ class AdminController extends Controller
         return view('Home.cart_show',compact('cart'));
 
     }
-    public function remove(){
-        
+    public function remove($id){
+        $cart= carts::find($id);
+        $cart->delete();
+        return redirect()->back();
     }
+    public function cash_order(){
+
+        // return view('Home.cash');
+        $user=Auth::user();
+       // dd($user);
+       $userid=$user->id;
+       //dd($user_id);
+       $data=carts::where('user_id','=',$userid)->get();
+       dd($data);
+
+       }
 }
